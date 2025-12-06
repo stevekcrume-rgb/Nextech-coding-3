@@ -1,0 +1,27 @@
+# ignore dependencies
+node_modules/
+
+# ignore reports (keep directory, ignore contents)
+reports/*.json
+reports/*.txt
+reports/*.html
+!reports/.gitkeep
+
+# ignore environment files with secrets
+env.js
+
+# ignore ide-specific files
+.vscode/
+.docker/
+
+
+# ignore os-specific files
+.DS_Store
+Thumbs.db
+
+
+
+# ignore logs and temporary files
+*.log
+*.tmp
+temp/

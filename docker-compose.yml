@@ -1,0 +1,28 @@
+services:
+  # The K6 Service
+  k6:
+    image: grafana/k6:latest
+    container_name: steve-k6-runner
+    volumes:
+      # Map the current directory (.) to /app inside the container
+      - ./:/app
+    working_dir: /app
+    environment:
+      # Pass environment variables (can be overridden)
+      - ENV=dev
+    # Default command: Run the main workflow
+    command: run scenarios/workflow.js
+    networks:
+      - k6-network
+
+  # TODO: InfluxDB
+  # influxdb:
+  #   image: influxdb:1.8
+  #   networks:
+  #     - k6-network
+  #   ports:
+  #     - "8086:8086"
+
+networks:
+  k6-network:
+    driver: bridge

@@ -1,0 +1,29 @@
+name: K6 Performance Tests
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  k6_test:
+    name: Run K6 Scripts
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run K6 Local Test (Smoke)
+        uses: grafana/k6-action@v0.3.0
+        with:
+          filename: tests/workflow.js
+          flags: --vus 1 --iterations 1 --env ENV=dev
+
+      # Example of how you would run the API specific tests
+      - name: Run API Isolation Tests
+        uses: grafana/k6-action@v0.3.0
+        with:
+          filename: tests/api_course_list.js
+          flags: --vus 1 --iterations 1
